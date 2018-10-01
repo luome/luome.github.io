@@ -3,8 +3,11 @@ layout: page
 title: About
 ---
 
-Hello.
+Hey,
 
-This will be your About page. Anything about you, it should be written here in details. You may describe your bio here like who you are, what you do, your intention, social site hyperlinks and how people can contact you, etc.
+
+I am a 22 year old graduate student from Sichuan University.
+To contact me, please e-mail **sculuo96@gmail.com**.
+Thanks for visiting!
 
 **Less is more..**
