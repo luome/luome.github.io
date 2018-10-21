@@ -11,4 +11,4 @@ updated: 2018-10-1 22:03
 
 
 ## 怎么可以联系到我？
-emailto:sculuo96@gmail.com
+mailto:sculuo96@gmail.com
