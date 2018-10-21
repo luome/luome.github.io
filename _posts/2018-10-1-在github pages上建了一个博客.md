@@ -11,4 +11,4 @@ updated: 2018-10-1 22:03
 
 
 ## 怎么可以联系到我？
-email:sculuo96@gamil.com
+emailto:sculuo96@gmail.com
