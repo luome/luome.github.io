@@ -60,7 +60,9 @@ where
 $$ head_i = Attention(QW_i^Q, KW_i^K, VW_i^V) $$
 
 
-其中 $W_i^Q \in R^{d_{model}*d_k}, W_i^K \in R^{d_{model} * d_k}, W_i^V \in R^{d_{model}*d_v}, W^O \in R^{hd_v * d_{model}}$
+其中 
+
+$$W_i^Q \in R^{d_{model}*d_k}, W_i^K \in R^{d_{model} * d_k}, W_i^V \in R^{d_{model}*d_v}, W^O \in R^{hd_v * d_{model}}$$
 
 在这个结构中，$h=8$并行的注意力层（或者说head）, 在每个head中, $d_k = d_v = d_{model}/h = 64$。
 
