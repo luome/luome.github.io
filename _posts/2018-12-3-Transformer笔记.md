@@ -57,7 +57,7 @@ $$ MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O $$
 
 where
 
-$$ head_i = Attention(QW_i^Q, KW_i^K, VW_i^V) $$\
+$$ head_i = Attention(QW_i^Q, KW_i^K, VW_i^V) $$
 
 
 其中 $W_i^Q \in R^{d_{model}*d_k}, W_i^K \in R^{d_{model} * d_k}, W_i^V \in R^{d_{model}*d_v}, W^O \in R^{hd_v * d_{model}}$
