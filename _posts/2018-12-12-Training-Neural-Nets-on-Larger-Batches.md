@@ -147,7 +147,7 @@ optimizer.step()
 predictions = parallel_model(inputs)
 ```
 
-```DataParallelModel```与```torch.nn.DataParallel```的不同只是前向计算的输出不会聚集在GPU-1上，前者输出是一个n_gpu个张量的元组，每一个张量都分布在不同的GPU上。
+其中```DataParallelModel```与```torch.nn.DataParallel```的不同只是前向计算的输出不会聚集在GPU-1上，前者输出是一个n_gpu个张量的元组，每一个张量都分布在不同的GPU上。
 
 ```DataParallelCriterion```封装了损失函数，将n_gpu张量的元组和target标签张量作为输入。它并行的计算了每一个GPU上的损失函数，分割target标签张量的方式与模型输入被DataParallel分块的方式相同。
 
@@ -186,6 +186,7 @@ predictions = parallel_model(inputs)
 首先我们需要将我们的脚本修改一下，这样它们才能在每个机器（节点）上运行。我们实际上将完全分布并为每个节点的每个GPU运行一个单独的进程，因此总共有8个进程。
 
 我们的训练脚本会变得更长一点因为我们需要初始化分布式后端来实现同步、封装模型和处理训练数据，从而能够在单独的数据子集上训练每个进程（每个进程是独立的，所以我们需要关心每个进程处理不同的数据集切片），这里是更新后的代码：
+
 ```python
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data import DataLoader
@@ -236,7 +237,7 @@ python -m torch.distributed.launch --nproc_per_node=4 --nnodes=2 --node_rank=1 -
 
 在一组机器上运行一堆几乎相同的命令的过程可能看起来有点单调乏味。所以现在可能是了解GNU并行的魔力：
 
-<iframe width="560" height="315" src="https://youtu.be/OpaiGYxkSuQ?list=PL284C9FF2488BC6D1" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OpaiGYxkSuQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 PyTorch v1.0在分布式模块中添加了c10d后端，这是一个让人激动的更新。我会更新这个简短的入门教程当v1.0更新之后，并提供更多的详细信息🔥 （事实上现在PyTorch已经更新到1.0了，但是作者没有更新）
 
