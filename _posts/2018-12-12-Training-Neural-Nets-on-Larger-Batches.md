@@ -159,7 +159,7 @@ DataParallelCriterion封装了损失函数，将n_gpu张量的元组和target标
 - 你的模型输出多个张量：你可能想要解开它们：```output_1, output_2 = zip(*predictions)```
 - 有时你不想使用一个并行的损失函数：将所有的张量聚集在一个GPU上： ```gathered_predictions = parallel.gather(predictions)```
 
-# ⏰ Distributed training:training on several machines
+## ⏰ Distributed training:training on several machines
 现在我们如何利用多台服务器的强大功能来进行更大规模的训练？
 
 最简单的选择是使用PyTorch DistributedDataParallel（PyTorch自带的模块torch.nn.parallel.DistributedDataParallel），这应该是对我们上述讨论的DataParallel最直接的替换。
@@ -167,7 +167,7 @@ DataParallelCriterion封装了损失函数，将n_gpu张量的元组和target标
 注意：尽管代码看起来很相似，但是在分布式设置中训练模型将改变你的工作流程，应为你实际上必须在每个节点上启动一个独立的python训练脚本（这些脚本都是相同的）。正如我们看到的那样，一旦开始，这些训练脚本将会由PyTorch分布式后端所同步。
 
 在实践中，这意味每个训练脚本有：
-- ＊*自己的优化器**而且每次迭代都执行一个完整的优化步骤，不需要参数广播。
+- **自己的优化器**而且每次迭代都执行一个完整的优化步骤，不需要参数广播。
 - 一个独立的python解释器：这也会避免在单个python解释器中驱动多个并行执行线程所带来的GIL冻结。
 
 当单个解释器驱动多个并行的前向计算调用时，python解释器的GIL会减慢大量使用Python循环／调用其前向计算的模型，在这些设置中，即使在单个机器的设置中，DistributedDataParalllel也可以有利地替换DataParallel。
