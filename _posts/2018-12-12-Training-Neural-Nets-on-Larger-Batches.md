@@ -149,7 +149,7 @@ predictions = parallel_model(inputs)
 
 其中```DataParallelModel```与```torch.nn.DataParallel```的不同只是前向计算的输出不会聚集在GPU-1上，前者输出是一个n_gpu个张量的元组，每一个张量都分布在不同的GPU上。
 
-```DataParallelCriterion```封装了损失函数，将n_gpu张量的元组和target标签张量作为输入。它并行的计算了每一个GPU上的损失函数，分割target标签张量的方式与模型输入被DataParallel分块的方式相同。
+DataParallelCriterion封装了损失函数，将n_gpu张量的元组和target标签张量作为输入。它并行的计算了每一个GPU上的损失函数，分割target标签张量的方式与模型输入被DataParallel分块的方式相同。
 
 我做了一个*DataParallelModel/DataParallelCriterion*内部的说明图：
 
