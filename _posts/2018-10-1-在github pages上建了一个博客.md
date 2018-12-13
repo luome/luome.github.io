@@ -1,5 +1,5 @@
 ---
-title: 在github pages上建了一个博客
+title: blog-on-github-io
 updated: 2018-10-1 22:03
 ---
 ## WHAT'S THIS?

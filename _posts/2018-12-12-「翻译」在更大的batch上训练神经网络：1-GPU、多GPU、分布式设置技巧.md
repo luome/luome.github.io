@@ -9,6 +9,8 @@ updated: 2018-12-12 15:48
 
 作者：[Thomas Wolf](https://medium.com/@Thomwolf)
 
+***
+
 我几乎花了2018年一年的时间来解决我的GPU带来的限制。不管是有一亿五千万个参数的语言模型，例如[OpenAI的生成预训练的Transformer模型](https://blog.openai.com/language-unsupervised/)（或者最近出来的相似的[BERT模型](https://arxiv.org/abs/1810.04805)）或者一个有三千万个元输入的元学习神经网络比如我们的[ICLR '18论文](https://medium.com/huggingface/from-zero-to-research-an-introduction-to-meta-learning-8e16e677f78a)，在我的GPU上几乎不能容纳几个训练样本。
 
 但是大多数时候，为了获得更好的结果，随机梯度下降算法需要跟大的batch，而不仅仅是少数的几个样本。
@@ -24,7 +26,7 @@ updated: 2018-12-12 15:48
 
 让我们以最简单的技巧开始：梯度积累
 
-# ⌛ Large batches on one or several GPUs
+## ⌛ Large batches on one or several GPUs
 所以当你构建了一个很好的模型，这个模型可能是在这个整洁的任务上最新的SOTA(最先进的模型 state-of-the-art)，但是每一次你打算讲一些样本堆叠到一个batch里的时候，你得到了一个CUDA RuntimeError:out of memory.
 
 ![CUDA RUNTIMEERROR](../images/12-12/cuda_error.png)
@@ -67,7 +69,7 @@ for i, (input, labels) in emumerate(training_set):
 ```
 Grzegorz Chlebus 在一篇帖子中详细的描述了Tensorflow中的梯度积累方法怎么做，点击[这里](https://gchlebus.github.io/2018/06/05/gradient-averaging.html)查看。
 
-# 😱 Pushing that to the extreme
+## 😱 Pushing that to the extreme
 你能训练甚至连单个样本都不能放在GPU上的模型吗？
 
 如果你的架构没有太多的残差链接，是的，它是可能的！解决方案是使用梯度检查点(gradient-checkpoint)来交换计算内存。
@@ -83,7 +85,7 @@ https://pytorch.org/docs/stable/checkpoint.html
 ![A “Memory-poor” strategy that needs O(1) memory (but requires O(n²) computation steps) — From Yaroslav Bulatov’s nice post: https://medium.com/tensorflow/fitting-larger-networks-into-memory-583e3c758ff9](../images/12-12/checkpoint.gif)
 
 
-# 🕰 Making the best of a multi-GPU machine 
+## 🕰 Making the best of a multi-GPU machine 
 现在让我们谈论一些在多个GPU上训练模型更具体的事。
 
 在多GPU上训练PyTorch模型的首选策略是使用```torch.nn.DataParallel```，它是一个容器，它通过在指定设备上拆分输入，沿着batch维度进行分块来并行化模块的应用程序。
@@ -119,7 +121,7 @@ $$ Vocabulary\_size * Sequence\_length * Samples\_per \_batch $$
 
 如果不调整模型或者优化方案，我们无法简单地减少此输出中元素的数量。但是我们可以确保内存负载更均匀的分布在GPU之间。
 
-# ⚖️ Balanced load on a multi-GPU machine
+## ⚖️ Balanced load on a multi-GPU machine
 有两种不平衡的GPU使用问题的解决方案：
 - 在模型的前向计算中计算损失函数
 - 以并行的方式计算损失
@@ -168,3 +170,74 @@ predictions = parallel_model(inputs)
 - ＊*自己的优化器**而且每次迭代都执行一个完整的优化步骤，不需要参数广播。
 - 一个独立的python解释器：这也会避免在单个python解释器中驱动多个并行执行线程所带来的GIL冻结。
 
+当单个解释器驱动多个并行的前向计算调用时，python解释器的GIL会减慢大量使用Python循环／调用其前向计算的模型，在这些设置中，即使在单个机器的设置中，DistributedDataParalllel也可以有利地替换DataParallel。
+
+现在我们直接介绍代码和用法。
+
+> DistributedDataParallel是构建在torch.distributed包之上的，该包提供用于同步分布式操作的低级基础，并且可以使用具有不同功能的多个后端（tcp, gloo, mpi, nccl)
+
+在这篇文章中，我将选择一种简单的方法来开箱即用，但是你应该[阅读文档](https://pytorch.org/docs/stable/distributed.html)以及阅读一篇Seb Arnold写的[很好的教程](https://pytorch.org/tutorials/intermediate/dist_tuto.html)来深入了解这个模块。
+
+我们会考虑一个简单但是通用的有两个4-GPU服务器（节点）的设置：
+
+![The main server has an accessible IP and an open port for communication](../images/12-12/DataParallel3.png)
+
+## 🏃 Adapting our Python training script for distributed training
+首先我们需要将我们的脚本修改一下，这样它们才能在每个机器（节点）上运行。我们实际上将完全分布并为每个节点的每个GPU运行一个单独的进程，因此总共有8个进程。
+
+我们的训练脚本会变得更长一点因为我们需要初始化分布式后端来实现同步、封装模型和处理训练数据，从而能够在单独的数据子集上训练每个进程（每个进程是独立的，所以我们需要关心每个进程处理不同的数据集切片），这里是更新后的代码：
+```python
+from torch.utils.data.distributed import DistributedSampler
+from torch.utils.data import DataLoader
+
+# Each process runs on 1 GPU device specified by the local_rank argument.
+parser = argparse.ArgumentParser()
+parser.add_argument("--local_rank", type=int)
+args = parser.parse_args()
+
+# Initializes the distributed backend which will take care of sychronizing nodes/GPUs
+torch.distributed.init_process_group(backend='nccl')
+
+# Encapsulate the model on the GPU assigned to the current process
+device = torch.device('cuda', arg.local_rank)
+model = model.to(device)
+distrib_model = torch.nn.parallel.DistributedDataParallel(model,
+                                                          device_ids=[args.local_rank],
+                                                          output_device=args.local_rank)
+
+# Restricts data loading to a subset of the dataset exclusive to the current process
+sampler = DistributedSampler(dataset)
+
+dataloader = DataLoader(dataset, sampler=sampler)
+for inputs, labels in dataloader:
+    predictions = distrib_model(inputs.to(device))         # Forward pass
+    loss = loss_function(predictions, labels.to(device))   # Compute loss function
+    loss.backward()                                        # Backward pass
+    optimizer.step()                                       # Optimizer step
+```
+
+## ✨ Launching multiple instances of our Python training script
+
+我们几乎要完成了，我们只需要在每个服务器上开始运行我们的训练脚本就行了。
+
+> 为了运行我们的脚本，我们需要使用```torch.distributed.launch```工具，它会使管理设置环境变量，以及每次会以正确的```local_rank``参数来运行脚本。
+
+第一台机器是我们的master机器，其他的所有机器应该能够访问到它，所以它有一个可达的IP地址（我们的例子中是192.168.1.1），而且应该开放一个端口（我们的例子是1234）。在我们的第一台机器上，我们使用```torch.distributed.launch```运行我的训练脚本:
+
+```shell
+python -m torch.distributed.launch --nproc_per_node=4 --nnodes=2 --node_rank=0 --master_addr="192.168.1.1" --master_port=1234 OUR_TRAINING_SCRIPT.py (--arg1 --arg2 --arg3 and all other arguments of our training script)
+```
+
+相似的，在第二台机器上运行脚本：
+```shell
+python -m torch.distributed.launch --nproc_per_node=4 --nnodes=2 --node_rank=1 --master_addr="192.168.1.1" --master_port=1234 OUR_TRAINING_SCRIPT.py (--arg1 --arg2 --arg3 and all other arguments of our training script)
+```
+这两个命令是完全一样的除了```--node_rank```参数在第一台机器上被设置为0，而在第二台机器上被设置了为1（该参数依次增加，如果有额外的服务器）
+
+在一组机器上运行一堆几乎相同的命令的过程可能看起来有点单调乏味。所以现在可能是了解GNU并行的魔力：
+
+<iframe width="560" height="315" src="https://youtu.be/OpaiGYxkSuQ?list=PL284C9FF2488BC6D1" frameborder="0" allowfullscreen></iframe>
+
+PyTorch v1.0在分布式模块中添加了c10d后端，这是一个让人激动的更新。我会更新这个简短的入门教程当v1.0更新之后，并提供更多的详细信息🔥 （事实上现在PyTorch已经更新到1.0了，但是作者没有更新）
+
+***
