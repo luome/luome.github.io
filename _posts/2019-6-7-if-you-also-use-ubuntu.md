@@ -63,11 +63,15 @@ syatemctl restart snapd
 
 - TIM与微信
 
-使用[deepin-wine-ubuntu](https://github.com/wszqkzqk/deepin-wine-ubuntu)安装与设置TIM、微信与百度云。
+使用[deepin-wine-ubuntu](https://github.com/wszqkzqk/deepin-wine-ubuntu)安装与设置TIM。
 
 - 办公
 
-使用[WPS](https://www.wps.cn/)代替office， [edraw Max](http://www.edrawsoft.cn/linuxdiagram/)代替Visio.
+使用[WPS](https://www.wps.cn/)代替office， [edraw Max](http://www.edrawsoft.cn/linuxdiagram/)代替Visio. 百度云在最近推出了linux版,可以在官网下载。
+
+- 文献管理
+
+[Mendeley Desktop](https://www.mendeley.com/download-desktop/)可以很好的帮助你管理文献
 
 - 音频与娱乐
 
