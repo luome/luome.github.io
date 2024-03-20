@@ -1,1 +1,7 @@
--
+- Jay Luo
+- Graduated in Sichuan University (2014 - 2021)
+- AI engineer in BioMap (2022 - Now) and Bytedance (2021-2022)
+- The place to collect knowledge
+	- [[预训练与语言模型]]
+- The place to share
+	-
