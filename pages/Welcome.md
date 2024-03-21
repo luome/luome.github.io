@@ -1,10 +1,10 @@
 # Jay Luo
 - ## About ME
-	- **2014.9 - 2021.7**.   Graduated in Sichuan University
-	- **2021.7 - 2022.8**.   AI engineer at Bytedance
-	- **2022.8 - Now**       AI engineer at BioMap
+	- **2014.9 - 2021.7**.    Graduate  at Sichuan University
+	- **2021.7 - 2022.8**.    AI engineer at Bytedance
+	- **2022.8 - Now**.        AI engineer at BioMap
 - ## The place to collect knowledge
-	- TODO Gradually organizing and sharing work notes. Square brackets are links when notes are ready.
+	- TODO Gradually organizing and sharing work notes. Square brackets are links.
 		- [[搜索与推荐]]
 		- [[预训练与语言模型]]
 		- [[算法工程与代码]]
