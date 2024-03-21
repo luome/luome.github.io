@@ -421,4 +421,7 @@
  :file/name-format :triple-lowbar
  :publishing/all-pages-public? true
  :feature/enable-journals? false
- :default-home {:page "👋 Hi, there"}}
+ :default-home {:page "👋 Hi, there"}
+ :ui/show-brackets? false
+ :feature/enable-flashcards? false
+ :feature/enable-whiteboards? false}
