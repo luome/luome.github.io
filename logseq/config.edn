@@ -299,7 +299,7 @@
  ;;  :charge-range    600}   ; Default value: 600
 
  ;; Favorites to list on the left sidebar
- :favorites ["welcome"]
+ :favorites ["👋 hi, there" "recent update" "hi, there" "welcome"]
 
  ;; Set flashcards interval.
  ;; Expected value:
@@ -419,4 +419,6 @@
  ;;      ;use triple underscore `___` for slash `/` in page title
  ;;      ;use Percent-encoding for other invalid characters
  :file/name-format :triple-lowbar
- :publishing/all-pages-public? true}
+ :publishing/all-pages-public? true
+ :feature/enable-journals? false
+ :default-home {:page "👋 Hi, there"}}
