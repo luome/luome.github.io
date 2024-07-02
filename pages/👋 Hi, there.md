@@ -3,6 +3,8 @@
 	- **2014.9 - 2021.7**.    UnderGrad and Graduate  at Sichuan University
 	- **2021.7 - 2022.8**.    AI engineer at Bytedance
 	- **2022.8 - Now**.         AI engineer at BioMap
+- ## Recent Update
+	- [[outlines:大模型固定格式解码]]
 - ## The place to collect knowledge
 	- TODO  organizing and sharing work notes.
 		- [[预训练与语言模型]]
