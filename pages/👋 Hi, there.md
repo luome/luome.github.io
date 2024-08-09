@@ -4,6 +4,7 @@
 	- **2021.7 - 2022.8**.    AI engineer at Bytedance
 	- **2022.8 - Now**.         AI engineer at BioMap
 - ## Recent Update
+	- [[RLHF中的PPO算法笔记]]
 	- [[outlines:大模型固定格式解码]]
 - ## The place to collect knowledge
 	- TODO  organizing and sharing work notes.

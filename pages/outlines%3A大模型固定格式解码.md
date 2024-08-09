@@ -46,7 +46,7 @@
 - ```
   function SAMPLE_TOKENS(L)
   	s ← ()                                 // 初始化空序列
-  	for i ← 1, L do                        // 遍历令牌序列长度
+  	for i ← 1, L do                        // 遍历 token 的序列长度
   		α ← LLM(s, θ)                      // 根据当前序列和模型参数生成预测分布
   		Construct the mask m(s)            // 构建掩码
   		ã ← m ⊙ α                         // 将掩码应用到预测分布
