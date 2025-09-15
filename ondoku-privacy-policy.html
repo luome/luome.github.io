@@ -3,41 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隐私政策 - ondoku 音读</title>
+    <title>隐私政策 - OnDoku 音读</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="images/iTunesArtwork@2x.png" type="image/png">
+    <link rel="icon" href="images/ondoku.png" type="image/png">
     <style>
-        .privacy-content {
-            padding: 80px 0;
-            max-width: 800px;
-            margin: 0 auto;
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .privacy-hero {
+            background: linear-gradient(135deg, var(--ondoku-light) 0%, var(--ondoku-primary) 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .privacy-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 213, 79, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .privacy-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-icon-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .app-icon-large:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        .privacy-hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .privacy-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
         }
         
-        .privacy-content h1 {
-            margin-bottom: 40px;
-            text-align: center;
-            color: var(--primary-color);
+        .privacy-content {
+            padding: 80px 0;
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 3;
+            margin-top: -40px;
+        }
+        
+        .privacy-content .container {
+            padding: 0 40px;
         }
         
         .privacy-content h2 {
-            font-size: 1.8rem;
-            margin-top: 40px;
-            text-align: left;
+            font-size: 2rem;
+            margin-top: 50px;
+            margin-bottom: 25px;
             color: var(--dark-color);
-            border-bottom: 2px solid var(--gray-color);
-            padding-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .privacy-content h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--ondoku-primary), var(--ondoku-secondary));
+            border-radius: 2px;
         }
         
         .privacy-content h3 {
             font-size: 1.4rem;
             margin-top: 30px;
-            color: var(--primary-color);
+            color: var(--ondoku-primary);
+            font-weight: 600;
         }
         
         .privacy-content p, .privacy-content ul {
             margin-bottom: 20px;
             line-height: 1.8;
+            font-size: 1.05rem;
         }
         
         .privacy-content ul {
@@ -46,6 +125,11 @@
         
         .privacy-content ul li {
             margin-bottom: 12px;
+            position: relative;
+        }
+
+        .privacy-content ul li::marker {
+            color: var(--ondoku-primary);
         }
         
         .privacy-content .last-updated {
@@ -53,42 +137,102 @@
             font-style: italic;
             color: #777;
             text-align: center;
-            padding: 20px;
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
+            padding: 25px;
+            background: linear-gradient(135deg, var(--ondoku-light), rgba(255, 213, 79, 0.1));
+            border-radius: 15px;
+            border: 2px solid rgba(255, 213, 79, 0.3);
         }
         
         .back-to-home {
             display: inline-block;
             margin-top: 40px;
+            background: linear-gradient(135deg, var(--ondoku-primary), var(--ondoku-secondary));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .back-to-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+            color: white;
         }
 
         .highlight-box {
-            background-color: var(--light-color);
-            border-left: 4px solid var(--primary-color);
-            padding: 20px;
+            background: linear-gradient(135deg, var(--ondoku-light), rgba(255, 235, 59, 0.1));
+            border-left: 6px solid var(--ondoku-primary);
+            padding: 25px;
             margin: 30px 0;
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, var(--ondoku-accent), transparent);
+            opacity: 0.3;
         }
 
         .highlight-box h3 {
             margin-top: 0;
-            color: var(--primary-color);
+            color: var(--ondoku-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .app-info {
-            text-align: center;
-            background: linear-gradient(135deg, var(--light-color) 0%, var(--gray-color) 100%);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            margin-bottom: 40px;
+        .highlight-box h3::before {
+            content: '\f06a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--ondoku-primary);
         }
 
-        .app-info h2 {
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            border: none;
-            padding: 0;
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ondoku-primary), transparent);
+            margin: 40px 0;
+            border-radius: 1px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .privacy-hero {
+                padding: 80px 0 40px;
+            }
+
+            .privacy-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .privacy-content {
+                margin-top: -20px;
+                border-radius: 15px 15px 0 0;
+            }
+
+            .privacy-content .container {
+                padding: 0 20px;
+            }
+
+            .privacy-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .app-icon-large {
+                width: 80px;
+                height: 80px;
+            }
         }
     </style>
 </head>
@@ -97,95 +241,103 @@
         <div class="container">
             <div class="logo">
                 <a href="index.html" class="logo-link">
-                    <img src="images/iTunesArtwork@2x.png" alt="Logo" class="app-logo">
-                    <h1>ondoku 音读</h1>
+                    <img src="images/ondoku.png" alt="OnDoku Logo" class="app-logo">
+                    <h1>OnDoku 音读</h1>
                 </a>
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">首页</a></li>
-                    <li><a href="index.html#download">下载</a></li>
+                    <li><a href="index.html#ondoku">了解应用</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="privacy-content container">
-        <div class="app-info">
-            <h2>ondoku 音读</h2>
-            <p>一款专注于日语学习的移动应用</p>
+    <section class="privacy-hero">
+        <div class="container">
+            <img src="images/ondoku.png" alt="OnDoku 音读" class="app-icon-large">
+            <h1>隐私政策</h1>
+            <p>OnDoku 音读 - 专业的日语音读与词汇学习工具</p>
         </div>
+    </section>
 
-        <h1>隐私政策</h1>
+    <section class="privacy-content">
+        <div class="container">
         
-        <div class="highlight-box">
-            <h3>重要说明</h3>
-            <p><strong>ondoku 音读应用不会收集、存储或处理任何用户个人数据。本应用完全在您的设备本地运行，无需注册或登录。</strong></p>
+            <div class="highlight-box">
+                <h3>重要说明</h3>
+                <p><strong>OnDoku 音读应用不会收集、存储或处理任何用户个人数据。本应用完全在您的设备本地运行，无需注册或登录。</strong></p>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h2>1. 概述</h2>
+            <p>OnDoku 音读（以下简称“本应用”）是一款专注于日语学习的移动应用。我们深度重视您的隐私权，并致力于保护您的个人信息。本隐私政策详细说明了我们如何处理您的信息。</p>
+        
+            <h2>2. 信息收集</h2>
+            <p><strong>我们不收集任何个人信息。</strong>具体包括但不限于：</p>
+            <ul>
+                <li>个人身份信息（姓名、邮箱、电话号码等）</li>
+                <li>设备标识符</li>
+                <li>位置信息</li>
+                <li>学习进度和记录</li>
+                <li>使用统计数据</li>
+                <li>崩溃报告或日志</li>
+            </ul>
+        
+            <h2>3. 数据存储</h2>
+            <p>本应用的所有功能和数据处理均在您的设备本地进行：</p>
+            <ul>
+                <li>学习进度和设置仅保存在您的设备上</li>
+                <li>不会向任何服务器发送数据</li>
+                <li>不会创建账户或用户档案</li>
+                <li>不需要网络连接即可正常使用</li>
+            </ul>
+
+            <h2>4. 第三方服务</h2>
+            <p>本应用不集成任何第三方分析服务、广告网络或社交媒体插件，确保您的隐私得到完全保护。</p>
+
+            <h2>5. 权限使用</h2>
+            <p>本应用可能请求以下设备权限，仅用于核心功能：</p>
+            <ul>
+                <li><strong>存储权限</strong>：用于保存学习进度和应用设置到设备本地存储</li>
+                <li><strong>音频权限</strong>：用于播放日语发音和录音练习功能</li>
+            </ul>
+            <p>所有权限的使用均限于应用功能需要，不会用于数据收集。</p>
+
+            <h2>6. 数据安全</h2>
+            <p>由于本应用不收集或传输任何数据，您的信息安全风险降至最低。您的学习数据完全保存在您的设备上，只有您本人可以访问。</p>
+
+            <h2>7. 儿童隐私</h2>
+            <p>本应用适合所有年龄段的用户使用。由于我们不收集任何个人信息，包括儿童的个人信息，因此不存在儿童隐私保护问题。</p>
+
+            <h2>8. 政策更新</h2>
+            <p>我们可能会不定期更新本隐私政策。任何重大变更都会通过应用更新的方式通知您。建议您定期查看本页面以了解最新的隐私政策。</p>
+
+            <h2>9. 联系我们</h2>
+            <p>如果您对本隐私政策有任何疑问或建议，请通过以下方式联系我们：</p>
+            <ul>
+                <li><strong>邮箱：</strong> sculuo96@gmail.com</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h3>总结</h3>
+                <p>OnDoku 音读应用采用“隐私优先”的设计理念，不收集任何用户数据，不需要网络连接，确保您的学习过程完全私密和安全。您可以放心使用本应用进行日语学习。</p>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <p class="last-updated">最后更新日期：2025年9月</p>
+            
+            <a href="index.html" class="back-to-home">返回首页</a>
         </div>
-
-        <h2>1. 概述</h2>
-        <p>ondoku 音读（以下简称"本应用"）是一款专注于日语学习的移动应用。我们深度重视您的隐私权，并致力于保护您的个人信息。本隐私政策详细说明了我们如何处理您的信息。</p>
-        
-        <h2>2. 信息收集</h2>
-        <p><strong>我们不收集任何个人信息。</strong>具体包括但不限于：</p>
-        <ul>
-            <li>个人身份信息（姓名、邮箱、电话号码等）</li>
-            <li>设备标识符</li>
-            <li>位置信息</li>
-            <li>学习进度和记录</li>
-            <li>使用统计数据</li>
-            <li>崩溃报告或日志</li>
-        </ul>
-        
-        <h2>3. 数据存储</h2>
-        <p>本应用的所有功能和数据处理均在您的设备本地进行：</p>
-        <ul>
-            <li>学习进度和设置仅保存在您的设备上</li>
-            <li>不会向任何服务器发送数据</li>
-            <li>不会创建账户或用户档案</li>
-            <li>不需要网络连接即可正常使用</li>
-        </ul>
-
-        <h2>4. 第三方服务</h2>
-        <p>本应用不集成任何第三方分析服务、广告网络或社交媒体插件，确保您的隐私得到完全保护。</p>
-
-        <h2>5. 权限使用</h2>
-        <p>本应用可能请求以下设备权限，仅用于核心功能：</p>
-        <ul>
-            <li><strong>存储权限</strong>：用于保存学习进度和应用设置到设备本地存储</li>
-            <li><strong>音频权限</strong>：用于播放日语发音和录音练习功能</li>
-        </ul>
-        <p>所有权限的使用均限于应用功能需要，不会用于数据收集。</p>
-
-        <h2>6. 数据安全</h2>
-        <p>由于本应用不收集或传输任何数据，您的信息安全风险降至最低。您的学习数据完全保存在您的设备上，只有您本人可以访问。</p>
-
-        <h2>7. 儿童隐私</h2>
-        <p>本应用适合所有年龄段的用户使用。由于我们不收集任何个人信息，包括儿童的个人信息，因此不存在儿童隐私保护问题。</p>
-
-        <h2>8. 政策更新</h2>
-        <p>我们可能会不定期更新本隐私政策。任何重大变更都会通过应用更新的方式通知您。建议您定期查看本页面以了解最新的隐私政策。</p>
-
-        <h2>9. 联系我们</h2>
-        <p>如果您对本隐私政策有任何疑问或建议，请通过以下方式联系我们：</p>
-        <ul>
-            <li><strong>邮箱：</strong> sculuo96@gmail.com</li>
-        </ul>
-
-        <div class="highlight-box">
-            <h3>总结</h3>
-            <p>ondoku 音读应用采用"隐私优先"的设计理念，不收集任何用户数据，不需要网络连接，确保您的学习过程完全私密和安全。您可以放心使用本应用进行日语学习。</p>
-        </div>
-        
-        <p class="last-updated">最后更新日期：2025年9月</p>
-        
-        <a href="index.html" class="back-to-home btn">返回首页</a>
     </section>
 
     <footer>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2025 ondoku 音读. 保留所有权利. | <a href="ondoku-privacy-policy.html">隐私政策</a> | <a href="mailto:sculuo96@gmail.com">联系我们</a></p>
+                <p>&copy; 2025 OnDoku 音读. 保留所有权利. | <a href="ondoku-privacy-policy.html">隐私政策</a> | <a href="mailto:sculuo96@gmail.com">联系我们</a></p>
                 <div class="social-icons">
                     <a href="https://github.com/luome" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://twitter.com/sculuo96" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
