@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linellae & OnDoku 音读 - 智能工具助力学习与生活</title>
+    <title>Silens & OnDoku 音读 & Linellae - 智能工具助力学习与生活</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="images/iTunesArtwork@2x.png" type="image/png">
+    <script src="js/i18n.js"></script>
 </head>
 <body>
     <header>
@@ -14,20 +15,35 @@
             <div class="logo">
                 <a href="#" class="logo-link">
                     <img src="images/iTunesArtwork@2x.png" alt="Linellae Logo" class="app-logo">
-                    <h1>Linellae & OnDoku</h1>
+                    <h1>Silens & OnDoku & Linellae</h1>
                 </a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#apps">我们的应用</a></li>
-                    <li><a href="#linellae">Linellae</a></li>
-                    <li><a href="#ondoku">OnDoku 音读</a></li>
+                    <li><a href="#apps" id="nav-apps">我们的应用</a></li>
+                    <li><a href="#silens" id="nav-silens">Silens</a></li>
+                    <li><a href="#ondoku" id="nav-ondoku">OnDoku 音读</a></li>
+                    <li><a href="#linellae" id="nav-linellae">Linellae</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">隐私政策 <i class="fas fa-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" id="nav-privacy">隐私政策 <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="privacy-policy.html">Linellae 隐私政策</a></li>
-                            <li><a href="ondoku-privacy-policy.html">OnDoku 隐私政策</a></li>
+                            <li><a href="silens-privacy-policy.html" id="nav-silens-privacy">Silens 隐私声明</a></li>
+                            <li><a href="ondoku-privacy-policy.html" id="nav-ondoku-privacy">OnDoku 隐私政策</a></li>
+                            <li><a href="privacy-policy.html" id="nav-linellae-privacy">Linellae 隐私政策</a></li>
                         </ul>
+                    </li>
+                    <li class="language-selector">
+                        <div class="lang-dropdown">
+                            <button class="lang-toggle">
+                                <span class="lang-current">中文</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <ul class="lang-menu">
+                                <li><button class="lang-btn active" data-lang="zh">中文</button></li>
+                                <li><button class="lang-btn" data-lang="en">English</button></li>
+                                <li><button class="lang-btn" data-lang="ja">日本語</button></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -37,17 +53,19 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>智能工具，助力学习与生活</h1>
-                <p>精心打造的智能应用，让学习与信息管理更高效。</p>
+                <h1 id="hero-title">智能工具，助力学习与生活</h1>
+                <p id="hero-subtitle">精心打造的智能应用，让学习与信息管理更高效。</p>
                 <div class="hero-buttons">
-                    <a href="#linellae" class="btn btn-primary">了解 Linellae</a>
-                    <a href="#ondoku" class="btn btn-secondary">了解 OnDoku 音读</a>
+                    <a href="#silens" class="btn btn-primary" id="hero-silens-btn">了解 Silens</a>
+                    <a href="#ondoku" class="btn btn-secondary" id="hero-ondoku-btn">了解 OnDoku 音读</a>
+                    <a href="#linellae" class="btn btn-secondary" id="hero-linellae-btn">了解 Linellae</a>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="app-icons">
-                    <img src="images/iTunesArtwork@2x.png" alt="Linellae" class="app-icon">
+                    <img src="images/silens.png" alt="Silens" class="app-icon">
                     <img src="images/ondoku.png" alt="OnDoku 音读" class="app-icon">
+                    <img src="images/iTunesArtwork@2x.png" alt="Linellae" class="app-icon">
                 </div>
             </div>
         </div>
@@ -55,8 +73,66 @@
 
     <section id="apps" class="apps-overview">
         <div class="container">
-            <h2>我们的应用</h2>
-            <p>两款精心打造的应用，满足您不同的需求</p>
+            <h2 id="apps-title">我们的应用</h2>
+            <p id="apps-subtitle">三款精心打造的应用，满足您不同的需求</p>
+        </div>
+    </section>
+
+    <section id="silens" class="app-section silens-section">
+        <div class="container">
+            <div class="app-content">
+                <div class="app-info">
+                    <div class="app-header">
+                        <img src="images/silens.png" alt="Silens" class="app-logo-large">
+                        <div class="app-title">
+                            <h2 id="silens-title">Silens</h2>
+                            <p class="app-subtitle" id="silens-subtitle">本地优先、隐私至上的智能相册</p>
+                        </div>
+                    </div>
+                    <div class="app-description">
+                        <p id="silens-description">一款真正尊重您隐私的智能相册应用。所有数据本地存储，AI 智能分类与搜索功能完全在设备上运行，让您安心管理珍贵回忆，无需担心数据泄露。</p>
+                        <ul class="feature-list" id="silens-features">
+                            <li><i class="fas fa-shield-alt"></i> <span>本地优先，数据完全私密</span></li>
+                            <li><i class="fas fa-brain"></i> <span>AI 智能分类与搜索</span></li>
+                            <li><i class="fas fa-lock"></i> <span>隐私至上，无云端同步</span></li>
+                            <li><i class="fas fa-images"></i> <span>优雅的相册管理体验</span></li>
+                        </ul>
+                        <div class="coming-soon">
+                            <span class="coming-soon-badge" id="silens-coming-soon">即将上线</span>
+                        </div>
+                        <a href="silens-privacy-policy.html" class="privacy-link" id="silens-privacy">查看隐私声明</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ondoku" class="app-section ondoku-section">
+        <div class="container">
+            <div class="app-content">
+                <div class="app-info">
+                    <div class="app-header">
+                        <img src="images/ondoku.png" alt="OnDoku 音读" class="app-logo-large">
+                        <div class="app-title">
+                            <h2 id="ondoku-title">OnDoku 音读</h2>
+                            <p class="app-subtitle" id="ondoku-subtitle">专业的日语音读与词汇学习工具</p>
+                        </div>
+                    </div>
+                    <div class="app-description">
+                        <p id="ondoku-description">专为中文学习者打造的日语音读与词汇学习工具。通过独特的中文拼音辅助，轻松掌握日语的吴音与汉音，结合系统化的词汇学习功能，全面提升发音、记忆与考试能力。</p>
+                        <ul class="feature-list" id="ondoku-features">
+                            <li><i class="fas fa-language"></i> <span>中文拼音辅助学习</span></li>
+                            <li><i class="fas fa-volume-up"></i> <span>吴音与汉音发音练习</span></li>
+                            <li><i class="fas fa-graduation-cap"></i> <span>N1-N5考试备考</span></li>
+                            <li><i class="fas fa-book"></i> <span>系统化词汇学习</span></li>
+                        </ul>
+                        <a href="https://apps.apple.com/cn/app/音读/id6748649854" class="app-store-btn">
+                            <img src="images/app-store-badge.svg" alt="Download OnDoku 音读 on the App Store">
+                        </a>
+                        <a href="ondoku-privacy-policy.html" class="privacy-link" id="ondoku-privacy">查看隐私政策</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -67,60 +143,21 @@
                     <div class="app-header">
                         <img src="images/iTunesArtwork@2x.png" alt="Linellae" class="app-logo-large">
                         <div class="app-title">
-                            <h2>Linellae</h2>
-                            <p class="app-subtitle">AI驱动的书签与资讯管理工具</p>
+                            <h2 id="linellae-title">Linellae</h2>
+                            <p class="app-subtitle" id="linellae-subtitle">AI驱动的书签与资讯管理工具</p>
                         </div>
                     </div>
                     <div class="app-description">
-                        <p>用AI超能力改变您的书签体验。将链接转化为知识，用AI驱动的洞察探索Hacker News——让您的所有信息都得到智能增强。</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-brain"></i> AI智能分析和总结</li>
-                            <li><i class="fas fa-bookmark"></i> 智能书签管理</li>
-                            <li><i class="fas fa-newspaper"></i> Hacker News深度洞察</li>
-                            <li><i class="fas fa-search"></i> 强大的搜索功能</li>
+                        <p id="linellae-description">用AI超能力改变您的书签体验。将链接转化为知识，用AI驱动的洞察探索Hacker News——让您的所有信息都得到智能增强。</p>
+                        <ul class="feature-list" id="linellae-features">
+                            <li><i class="fas fa-brain"></i> <span>AI智能分析和总结</span></li>
+                            <li><i class="fas fa-bookmark"></i> <span>智能书签管理</span></li>
+                            <li><i class="fas fa-newspaper"></i> <span>Hacker News深度洞察</span></li>
+                            <li><i class="fas fa-search"></i> <span>强大的搜索功能</span></li>
                         </ul>
                         <a href="https://apps.apple.com/us/app/linellae/id6743321394" class="app-store-btn">
                             <img src="images/app-store-badge.svg" alt="Download Linellae on the App Store">
                         </a>
-                    </div>
-                </div>
-                <div class="app-preview">
-                    <div class="linellae-preview">
-                        <img src="images/iTunesArtwork@2x.png" alt="Linellae Preview" class="linellae-icon-preview">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="ondoku" class="app-section ondoku-section">
-        <div class="container">
-            <div class="app-content reverse">
-                <div class="app-info">
-                    <div class="app-header">
-                        <img src="images/ondoku.png" alt="OnDoku 音读" class="app-logo-large">
-                        <div class="app-title">
-                            <h2>OnDoku 音读</h2>
-                            <p class="app-subtitle">专业的日语音读与词汇学习工具</p>
-                        </div>
-                    </div>
-                    <div class="app-description">
-                        <p>专为中文学习者打造的日语音读与词汇学习工具。通过独特的中文拼音辅助，轻松掌握日语的吴音与汉音，结合系统化的词汇学习功能，全面提升发音、记忆与考试能力。</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-language"></i> 中文拼音辅助学习</li>
-                            <li><i class="fas fa-volume-up"></i> 吴音与汉音发音练习</li>
-                            <li><i class="fas fa-graduation-cap"></i> N1-N5考试备考</li>
-                            <li><i class="fas fa-book"></i> 系统化词汇学习</li>
-                        </ul>
-                        <div class="coming-soon">
-                            <span class="coming-soon-badge">即将上线</span>
-                        </div>
-                        <a href="ondoku-privacy-policy.html" class="privacy-link">查看隐私政策</a>
-                    </div>
-                </div>
-                <div class="app-preview">
-                    <div class="ondoku-preview">
-                        <img src="images/ondoku.png" alt="OnDoku 音读 Preview" class="ondoku-icon-preview">
                     </div>
                 </div>
             </div>
@@ -130,7 +167,7 @@
     <footer>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2025 Linellae & OnDoku 音读. 保留所有权利. | <a href="privacy-policy.html">Linellae 隐私政策</a> | <a href="ondoku-privacy-policy.html">OnDoku 隐私政策</a> | <a href="mailto:sculuo96@gmail.com">联系我们</a></p>
+                <p>&copy; 2025 Silens & OnDoku 音读 & Linellae. <span id="footer-rights">保留所有权利</span>. | <a href="silens-privacy-policy.html" id="footer-silens-privacy">Silens 隐私声明</a> | <a href="ondoku-privacy-policy.html" id="footer-ondoku-privacy">OnDoku 隐私政策</a> | <a href="privacy-policy.html" id="footer-linellae-privacy">Linellae 隐私政策</a> | <a href="mailto:sculuo96@gmail.com" id="footer-contact">联系我们</a></p>
                 <div class="social-icons">
                     <a href="https://github.com/luome" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://twitter.com/sculuo96" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
