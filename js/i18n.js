@@ -25,13 +25,13 @@ const translations = {
         // Silens
         silens: {
             title: "Silens",
-            subtitle: "本地优先、隐私至上的智能相册",
-            description: "一款真正尊重您隐私的智能相册应用。所有数据本地存储，AI 智能分类与搜索功能完全在设备上运行，让您安心管理珍贵回忆，无需担心数据泄露。",
+            subtitle: "AI驱动的智能体相册工具",
+            description: "一款AI驱动的智能体相册工具，可以智能地创建相册、与照片对话、分析照片。我们高度重视您的隐私，所有AI处理均在安全的环境中进行，您的照片数据不会被用于训练AI模型或分享给第三方。",
             features: {
-                privacy: "本地优先，数据完全私密",
-                ai: "AI 智能分类与搜索",
-                lock: "隐私至上，无云端同步",
-                images: "优雅的相册管理体验"
+                privacy: "智能创建相册",
+                ai: "与照片对话",
+                lock: "AI照片分析",
+                images: "隐私优先保护"
             },
             comingSoon: "即将上线",
             privacyLink: "查看隐私声明"
@@ -91,13 +91,13 @@ const translations = {
         },
         silens: {
             title: "Silens",
-            subtitle: "Local-first, privacy-first intelligent photo album",
-            description: "A truly privacy-respecting intelligent photo album application. All data is stored locally, and AI intelligent classification and search functions run entirely on the device, allowing you to manage precious memories with peace of mind without worrying about data leaks.",
+            subtitle: "AI-powered intelligent photo album agent",
+            description: "An AI-powered intelligent photo album agent that can intelligently create albums, chat with photos, and analyze photos. We highly value your privacy. All AI processing is conducted in a secure environment, and your photo data will not be used to train AI models or shared with third parties.",
             features: {
-                privacy: "Local-first, completely private data",
-                ai: "AI intelligent classification and search",
-                lock: "Privacy-first, no cloud sync",
-                images: "Elegant photo album management experience"
+                privacy: "Intelligent album creation",
+                ai: "Chat with photos",
+                lock: "AI photo analysis",
+                images: "Privacy-first protection"
             },
             comingSoon: "Coming Soon",
             privacyLink: "View Privacy Statement"
@@ -154,13 +154,13 @@ const translations = {
         },
         silens: {
             title: "Silens",
-            subtitle: "ローカル優先、プライバシー重視のインテリジェントフォトアルバム",
-            description: "真にプライバシーを尊重するインテリジェントフォトアルバムアプリケーション。すべてのデータはローカルに保存され、AIインテリジェント分類と検索機能は完全にデバイス上で実行され、データ漏洩を心配することなく、安心して貴重な思い出を管理できます。",
+            subtitle: "AI駆動のインテリジェントフォトアルバムエージェント",
+            description: "インテリジェントにアルバムを作成し、写真と対話し、写真を分析できるAI駆動のインテリジェントフォトアルバムエージェント。プライバシーを非常に重視しており、すべてのAI処理は安全な環境で行われ、写真データはAIモデルのトレーニングに使用されたり、第三者と共有されたりすることはありません。",
             features: {
-                privacy: "ローカル優先、データは完全にプライベート",
-                ai: "AIインテリジェント分類と検索",
-                lock: "プライバシー重視、クラウド同期なし",
-                images: "エレガントなフォトアルバム管理体験"
+                privacy: "インテリジェントなアルバム作成",
+                ai: "写真との対話",
+                lock: "AI写真分析",
+                images: "プライバシー優先の保護"
             },
             comingSoon: "近日公開",
             privacyLink: "プライバシー声明を表示"
